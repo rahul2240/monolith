@@ -24,14 +24,24 @@ class OpsAccountabilityJob < ApplicationJob
     end
 
     unless oua.empty?
-      notify "There are #{oua.count} applications that have been around for "\
-        "like two days... and STILL haven't been reviewed"
+      if oua.count!=1
+        notify "There are #{oua.count} applications that have been around for "\
+          "like two days... and STILL haven't been reviewed"
+      else
+        notify "There is 1 application that has been around for "\
+          "like two days... and STILL hasn't been reviewed"
+      end
       succ = false
     end
 
     unless aa.empty?
-      notify "#{aa.count} clubs have been accepted, but haven't had their "\
-        'onboarding calls schedule after a week!'
+      if aa.count!=1
+        notify "#{aa.count} clubs have been accepted, but haven't had their "\
+          'onboarding calls schedule after a week!'
+      else
+        notify "1 club has been accepted, but hasn't had their "\
+          'onboarding calls schedule after a week!'
+      end
       succ = false
     end
 
